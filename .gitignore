@@ -1,0 +1,11 @@
+/.idea/
+/node_modules/
+/.vscode/
+/.cache/
+/dist/
+/.env
+/.env*
+!/.env-*
+/coverage/
+/.nyc_output/
+/.parcel-cache/
