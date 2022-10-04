@@ -14,10 +14,40 @@ const oidc = new Provider('http://localhost:3000', {
 
 
 app.use('/interaction', async (req, res, next) => {
-  const details = await oidc.interactionDetails(req, res);
+  const accountId = 'abc';
+  const { Grant } = oidc;
+  const interactionDetails = await oidc.interactionDetails(req, res);
+  const { 
+    grantId,
+    params: { client_id: clientId }, 
+    prompt: { 
+      details: {
+        missingOIDCScope = [],
+        missingOIDCClaims = [],
+        missingResourceScopes = {},
+      },     
+    },
+  } = interactionDetails;
+
+  const grant = grantId != null
+    ? await Grant.find(grantId)
+    : new Grant({
+        accountId,
+        clientId,
+      });
+
+  grant.addOIDCScope(missingOIDCScope.join(' '));
+  grant.addOIDCClaims(missingOIDCClaims);
+  Object.entries(missingResourceScopes).forEach( ([indicator, scopes]) => grant.addResourceScope(indicator, scopes.join(' ')));
+
+  const newGrantId = await grant.save();
+
   return oidc.interactionFinished(req, res, {
     login: {
-      accountId: 'abc',
+      accountId,
+    },
+    consent: { 
+      grantId: newGrantId
     },
   });
 });
