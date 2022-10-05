@@ -1,5 +1,6 @@
 const express = require('express');
 const { Provider } = require('oidc-provider');
+const { nanoid } = require('nanoid');
 
 const app = express();
 
@@ -18,7 +19,7 @@ const oidc = new Provider(`http://localhost:${PORT}`, {
 const { Grant } = oidc;
 
 app.use('/interaction', async (req, res, next) => {
-  const accountId = 'abc';
+  const accountId = nanoid();
   const { 
     grantId,
     params: { client_id: clientId }, 
