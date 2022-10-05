@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "nodemon -w .env -w . -e js,json,jsx,scss,css,sass,html -x 'dotenv -- node --trace-warnings index.js'"
+    "dev": "nodemon -w .env -w . -e js,json,jsx,scss,css,sass,html -x 'dotenv -- node --inspect --trace-warnings index.js'"
   },
   "keywords": [],
   "author": "",
