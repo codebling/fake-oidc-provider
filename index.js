@@ -51,5 +51,3 @@ app.use('/interaction', async (req, res, next) => {
 });
 app.use(oidc.callback());
 app.listen(3000);
-// oidc.use(app);
-// oidc.listen(3000);
