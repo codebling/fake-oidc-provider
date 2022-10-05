@@ -11,12 +11,10 @@ const oidc = new Provider('http://localhost:3000', {
     devInteractions: { enabled: false },
   },
 });
-
+const { Grant } = oidc;
 
 app.use('/interaction', async (req, res, next) => {
   const accountId = 'abc';
-  const { Grant } = oidc;
-  const interactionDetails = await oidc.interactionDetails(req, res);
   const { 
     grantId,
     params: { client_id: clientId }, 
@@ -27,7 +25,7 @@ app.use('/interaction', async (req, res, next) => {
         missingResourceScopes = {},
       },     
     },
-  } = interactionDetails;
+  } = await oidc.interactionDetails(req, res);
 
   const grant = grantId != null
     ? await Grant.find(grantId)
