@@ -3,7 +3,11 @@ const { Provider } = require('oidc-provider');
 
 const app = express();
 
-const oidc = new Provider('http://localhost:3000', {
+const {
+  PORT = 3000,
+} = process.env;
+
+const oidc = new Provider(`http://localhost:${PORT}`, {
   features: {
     registration: {
       enabled: true,
@@ -50,4 +54,4 @@ app.use('/interaction', async (req, res, next) => {
   });
 });
 app.use(oidc.callback());
-app.listen(3000);
+app.listen(PORT);
