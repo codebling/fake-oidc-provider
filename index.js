@@ -5,11 +5,11 @@ const { nanoid } = require('nanoid');
 const app = express();
 
 const {
-  PORT = 3000,
+  PORT: PROVIDER_PORT = 3000,
   FAIL = false,
 } = process.env;
 
-const oidc = new Provider(`http://localhost:${PORT}`, {
+const oidc = new Provider(`http://localhost:${PROVIDER_PORT}`, {
   features: {
     registration: {
       enabled: true,
@@ -60,4 +60,4 @@ app.use('/interaction', async (req, res, next) => {
   }
 });
 app.use(oidc.callback());
-app.listen(PORT);
+app.listen(PROVIDER_PORT);
