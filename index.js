@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const express = require('express');
 const { Provider, errors: { InvalidGrant }, } = require('oidc-provider');
 const { nanoid } = require('nanoid');
