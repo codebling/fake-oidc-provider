@@ -61,4 +61,9 @@ app.use('/interaction', async (req, res, next) => {
   }
 });
 app.use(oidc.callback());
-app.listen(PROVIDER_PORT);
+
+if (require.main === module) {
+  app.listen(PROVIDER_PORT);
+}
+
+module.exports = app;
