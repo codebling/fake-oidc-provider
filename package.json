@@ -7,7 +7,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "bin": {
-    "fake-oidc-provider": "./index.js"
+    "fake-oidc-provider": "index.js"
   },
   "scripts": {
     "start": "npm run dev",
