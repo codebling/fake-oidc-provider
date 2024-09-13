@@ -5,7 +5,7 @@ Fake OpenID Connect Provider which authenticates all requests without prompting 
 # Quick start
 
 ```
-npx fake-oidc-provider
+npx codebling/fake-oidc-provider
 ```
 
 Set the port environment variable to change the port.
